@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <div class="app">
+    <ul class="list_course">
+        <li class="list_course-item">
+            <img src="/DOM/HTML CSS PRO.png" alt="">
+          <h4>HTML CSS Pro</h4>
+        <p class="price">1.299.000</p>
+        </li>
+        <li class="list_course-item">
+            <img src="/DOM/NgonNguTienXuLi.png" alt="">
+          <h4>Ngôn ngữ tiền xử lí Sass</h4>
+        <p class="price">1.299.000</p>
+        </li>
+        <li class="list_course-item">
+            <img src="/DOM/KienThucNhapMonIT.png" alt="">
+          <h4>Kiến thức nhập môn iT</h4>
+        <p class="price">1.299.000</p>
+        </li>
+        <li class="list_course-item">
+            <img src="/DOM/LapTrinhTuCoBanToiNangCao.png" alt="">
+          <h4>Lập trình từ cơ bản tới nâng cao </h4>
+        <p class="price">1.299.000</p>
+        </li>
+    </ul>
+    <div class="themkhoahoc hidden">
+    
+        <label for="">Thêm khóa học</label>
+    
+   <div class="anh">
+    <label for="">Hình ảnh môn học</label>
+    <input type="text" id="AnhMonHoc">
+   </div>
+    <div class="ten">
+    <label for="">Tên môn học</label>
+    <input type="text" id="TenMonHoc">
+    </div>
+   <div class="gia">
+    <label for="">giá</label>
+    <input type="text" id="GiaMonHoc">
+</div>
+
+   </div>
+    <button class="btn">Thêm</button>
+    <button class="btnXoa" onclick="Xoa()">Xoa</button>
+    <input type="text" id="chonTenKhoaHoccanXoa">
+
+</div>
+        <style>
+            
+            .btn{
+                text-align:  center;
+                border-radius: 10px;
+                border: 1px solid ;
+                background-color: palevioletred;
+                width: 50px;
+                height: 30px;
+            }
+            .list_course{
+                list-style: none;
+                display: flex;
+                flex-wrap: wrap;
+
+            }
+            .list_course-item{
+             margin-right: 10px;
+            }
+            .list_course-item img{
+             border-radius:  20px;
+             width: 350px;
+            }
+            .hidden{
+                display: none;
+
+            }
+
+        </style>
+
+        <script>
+            function layTatCaKhoaHoc() {
+            var danhSachKhoaHoc = document.querySelectorAll(".list_course-item");
+            var tatCaKhoaHoc = [];
+
+            danhSachKhoaHoc.forEach(function(khoaHoc) {
+                var img = khoaHoc.querySelector("img").src;
+                var ten = khoaHoc.querySelector("h4").textContent;
+                var gia = khoaHoc.querySelector(".price").textContent;
+
+                var khoaHocObject = {
+                    img: img,
+                    ten: ten,
+                    gia: gia
+                };
+
+                tatCaKhoaHoc.push(khoaHocObject);
+            });
+
+            return tatCaKhoaHoc;
+        }
+
+var tatCaKhoaHoc = layTatCaKhoaHoc();
+
+function XoaKhoaHoc(tenKhoaHoc){
+    console.log(tenKhoaHoc)
+    var danhSachKhoaHoc = document.querySelectorAll(".list_course-item");
+     danhSachKhoaHoc.forEach(function(a){
+        var b= a.querySelector('h4').textContent;
+       if (b===tenKhoaHoc){
+        a.remove();
+       }
+          
+     })
+}
+function Xoa (){
+    var tenKhoaHoc = document.getElementById("chonTenKhoaHoccanXoa").value;
+
+    XoaKhoaHoc(tenKhoaHoc);
+}
+            var btnThem = document.querySelector(".btn");
+            var list_cou = document.querySelector(".list_course");
+            var btnXoa = document.querySelector(".btnXoa");
+btnThem.addEventListener("click", function() {
+                var themKhoaHoc = document.querySelector(".themkhoahoc");
+                themKhoaHoc.classList.toggle("hidden");
+
+                var img_courses = document.getElementById("AnhMonHoc").value.trim();
+                var name_courses = document.getElementById("TenMonHoc").value.trim();
+                var price_courese = document.getElementById("GiaMonHoc").value.trim();
+
+                if (img_courses !== "" && name_courses !== "" && price_courese !== "") {
+              var newCourses = document.createElement('li')
+              newCourses.classList.add("list_course-item")
+
+              var img = document.createElement("img")
+              img.src=img_courses;
+              img.alt=""
+
+              var h4 = document.createElement("h4");
+              h4.textContent=name_courses;
+
+              var p = document.createElement("p")
+              p.textContent= price_courese;
+              p.classList.add("price")
+
+
+              newCourses.appendChild(img);
+              newCourses.appendChild(h4);
+              newCourses.appendChild(p);
+
+              list_cou.appendChild(newCourses);
+                }
+            });
+        </script>    
+  
+</body>
+</html>
